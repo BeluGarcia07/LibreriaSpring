@@ -15,7 +15,7 @@ public class EditorialServicio {
     private EditorialRepositorio editorialRepositorio;
 
     @Transactional(rollbackFor = {Exception.class})
-    public Editorial crear(String nombre) {
+    public Editorial crear(String nombre)throws ErrorServicio {
         Editorial editorial = new Editorial();
         editorial.setNombre(nombre);
         editorial.setAlta(true);
@@ -43,7 +43,7 @@ public class EditorialServicio {
 
             return editorialRepositorio.save(editorial);
         } else {
-            throw new ErrorServicio("La editorial no existe.");
+            throw new ErrorServicio("La editorial que queres editar no existe.");
         }
 
     }
@@ -57,7 +57,7 @@ public class EditorialServicio {
             editorial.setNombre(nombre);
             return editorialRepositorio.save(editorial);
         } else {
-            throw new ErrorServicio("El autor no existe.");
+            throw new ErrorServicio("La editorial que queres editar no existe.");
         }
     }
 

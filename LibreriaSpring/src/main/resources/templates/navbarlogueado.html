@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <link href="https://fonts.googleapis.com/css2?family=Ephesis&display=swap" rel="stylesheet">
+        <link rel="preconnect" href="https://fonts.googleapis.com">
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="preconnect" href="https://fonts.googleapis.com">
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link href="https://fonts.googleapis.com/css2?family=Dancing+Script&family=Ephesis&display=swap" rel="stylesheet">
+        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css"
+              rel="stylesheet"
+              integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3"
+              crossorigin="anonymous"/>
+        <link rel="preconnect" href="https://fonts.googleapis.com" />
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+        <link
+            href="https://fonts.googleapis.com/css2?family=Fredoka&family=Poppins:wght@200&family=Questrial&family=Righteous&family=Saira:wght@100&display=swap"
+            rel="stylesheet" />
+        <link rel="stylesheet" href="././stylenavbar.css" />
+
+
+        <title>Navbar Logueado</title>
+
+    </head>
+
+    <body>
+
+        <div class="containere sticky-top" id="header" th:fragment="navbarlogueado">
+            <div >
+                <header
+                    class="d-flex flex-wrap align-items-center justify-content-center justify-content-md-between py-3 mb-4 border-bottom">
+                    <a class="d-flex align-items-center col-md-3 mb-2 mb-md-0 text-dark text-decoration-none" href="/">
+                        <img src="https://i.postimg.cc/PrQQ312m/logo-Bibliotek.png" height="75%" width="75%" >
+                    </a>
+                    <div class="col-md-3">
+                        <h10 class="textnav" th:if="${session.usuariosession != null }" th:text="${'Hola ' + session.usuariosession.nombre}"></h10>  
+
+                        <div class="contenedoricon"> 
+                            <a href="/logout" ><img
+                                    class="icononav"
+                                    src="https://cdn-icons-png.flaticon.com/512/1828/1828479.png"
+                                    alt="Logout"
+                                    /><div class="centrado">Logout</div></a></div>
+                        <div class="contenedoricon">
+                            <a href="/contacto"><img
+                                    class="icononav"
+                                    src="https://cdn-icons-png.flaticon.com/128/1633/1633686.png"
+                                    alt="contacto"
+                                    /><div class="centrado">Contacto</div></a></div>
+                        
+                        <div class="contenedoricon">
+                            <a href="/checkoutcarrito"><img
+                                    class="icononav"
+                                    src="https://cdn-icons-png.flaticon.com/512/711/711192.png"
+                                    alt="carrito"
+                                    /><div class="centrado">Carrito</div></a></div>
+
+
+                    </div>
+                </header>
+            </div>
+            
+            <nav class="navbar navbar-expand-lg bg-transparent" >
+
+                <div class="tiposarte">
+                        <ul class="navbar-nav">
+                        <li class="nav-item">
+                            <a class="nav-link" href="/libro">Libros</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="/autor">Autores</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="/editorial">Editoriales</a>
+                     
+                    </ul>
+
+                </div>
+
+            </nav>
+
+        </div>
+
+        <!--inicio sección footer-->
+        <div class="footer" th:fragment="footer">    
+
+            <footer id="footer" class="footer-sitio pt-3 mt-5">
+                <div class="container">
+                    <div class="row">
+                        <div class="col-md-4">
+                            <h3 class="text-uppercase text-center pb-4">Quienes Somos</h3>
+                            <p class="justify">La Bibliotek surge en el año 2022 con el fin de practicar SpringBoot y adquirir nuevos conocimientos. Somos expertos en libros y sus autores. Ofrecemos un servicio personalizado, profesional y confiable. </p>
+                            <h6 class="text-center">Seguinos en nuestras redes sociales</h6>
+                            <div class="sociales text-center text-lg-center">
+                                <img class="icosociales" src="https://i.postimg.cc/ThVh0mZ8/facebook-square-brands.jpg" alt="Facebook"/>
+                                <a href="http://facebook.com">
+
+                                </a>
+                                <img class="icosociales" src="https://i.postimg.cc/kBwG3CJf/twitter-square-brands.jpg" alt="Twitter"/>
+                                <a href="http://twitter.com">
+                                </a>
+                                <img class="icosociales" src="https://i.postimg.cc/QHjCyC3F/instagram-square-brands.jpg" alt="Instagram"/>
+                                <a href="http://instagram.com">
+                                </a>
+                                <img class="icosociales" src="https://i.postimg.cc/zb2csptd/pinterest-square-brands.jpg" alt="Pinterest"/>
+                                <a href="http://pinterest.com">
+                                </a>                               
+                            </div>
+
+                        </div><!-- col Quienes somos -->
+                        <div class="col-md-4 text-center">
+                            <h3 class="text-uppercase ">Contacto</h3>
+                            <div class="infofooter">
+                                <h6>
+                                    <img class="ico-footer" src="https://cdn-icons-png.flaticon.com/128/1633/1633686.png" alt="e-mail"/>info@bibliotek.com.ar</h6>
+                                <h6>
+                                    <img class="ico-footer" src="https://cdn-icons-png.flaticon.com/128/126/126341.png"   alt="telefono"/>+54 351 5591606</h6>
+                                <h6>
+                                    <img class="ico-footer" src="https://cdn-icons-png.flaticon.com/128/447/447031.png" alt="dirección" /><a style="font-size: 14px" target="_black" href="https://www.google.com.ar/maps/place/Plaza+Rivadavia/@-31.3929444,-64.1750188,15z/data=!4m5!3m4!1s0x943298678b7d6461:0xf705f399f40ffc54!8m2!3d-31.3916664!4d-64.18484">Av. SiempreViva 742, Spingfield, Argentina.</a>
+                                </h6>
+                            </div><!-- info-contacto -->
+                        </div>
+                        <!-- cierre col contatco -->
+                        <div class="col-md-4 text-center">
+                            <h3 class="text-uppercase text-center pb-4">Horario</h3>
+                            <div class="horarios">
+                                <p class="text-justify">Lunes a Viernes: 9:00 - 19:00 hs</p>
+                                <p class="text-justify">Sábado y Domingo: 10:00 - 21:00 hs</p>
+                            </div> <!-- cierre horarios -->
+                        </div>
+                        <hr class="w-100">
+                        <p class="text-end copyright w-100">© Bibliotek 2022. Todos los derechos reservados.</p>
+                    </div><!--.row-->
+                </div> <!--.container-->
+            </footer>
+
+            <!--fin sección footer-->
+
+
+            <script
+                src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"
+                integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p"
+                crossorigin="anonymous"
+            ></script>
+    </body>
+</html>

@@ -2,8 +2,11 @@
 package com.libreria.entidades;
 
 
+import com.libreria.enumeracion.Categoria;
 import java.io.Serializable;
 import javax.persistence.Entity;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
@@ -30,8 +33,17 @@ public class Libro implements Serializable {
     private Editorial editorial;
     @OneToOne
     private Foto foto;
+    @Enumerated(EnumType.STRING)
+    private Categoria categoria;
 
-    
+    public Categoria getCategoria() {
+        return categoria;
+    }
+
+    public void setCategoria(Categoria categoria) {
+        this.categoria = categoria;
+    }
+
     public Libro() {
     }
 
