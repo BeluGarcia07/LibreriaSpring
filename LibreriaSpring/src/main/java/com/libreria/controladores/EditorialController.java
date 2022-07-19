@@ -14,13 +14,13 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 
 @Controller
-@RequestMapping("/editorial")
+@RequestMapping("/")
 public class EditorialController {
 
     @Autowired
     private EditorialServicio editorialServicio;
 
-    @PostMapping("/crear")
+    @PostMapping("/crearEditorial")
     public String crear(ModelMap modelo, @RequestParam String nombre) {
         try {
             editorialServicio.crear(nombre);
@@ -30,10 +30,10 @@ public class EditorialController {
             return "registro.html";
         }
         modelo.put("titulo", "La editorial '" + nombre + "' fue cargada con exito!");
-        return "redirect:/index";
+        return "editorial.html";
     }
 
-    @GetMapping("/editar/{id}")
+    @GetMapping("/editarEditorial/{id}")
     public String editar(ModelMap modelo, @RequestParam String id ) {
 
         try {
@@ -42,10 +42,10 @@ public class EditorialController {
         } catch (Exception e) {
         }
 
-        return "/editarAutor.html";
+        return "index.html";
     }
 
-    @PostMapping
+    @PostMapping("/editarEditorial")
     public String editar(ModelMap modelo, @RequestParam String id, @RequestParam String nombre) {
         try {
             editorialServicio.editar(id, nombre);

@@ -16,7 +16,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 
 @Controller
-@RequestMapping("/autor")
+@RequestMapping("/")
 public class AutorController {
 
     @Autowired
@@ -27,13 +27,13 @@ public class AutorController {
         try {
             autorServicio.crear(nombre, archivo);
         } catch (ErrorServicio e) {
-            modelo.put("error", e.getMessage());
+            modelo.put("errorReg", e.getMessage());
             modelo.put("nombre", nombre);
             modelo.put("archivo", archivo);
             return "registro.html";
         }
         modelo.put("titulo", "El autor '" + nombre + "' fue cargado con exito!");
-        return "redirect:/index";
+        return "autor.html";
     }
 
     @GetMapping("/editar/{id}")

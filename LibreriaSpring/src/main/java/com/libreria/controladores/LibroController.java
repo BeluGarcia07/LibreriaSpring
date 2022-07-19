@@ -15,41 +15,40 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 
 @Controller
-@RequestMapping("/libro")
+@RequestMapping("/")
 public class LibroController {
 
     @Autowired
     private LibroServicio libroServicio;
 
-    @PostMapping("/crear")
+    
+    @PostMapping("/crearLibro")
     public String crear(ModelMap modelo, @RequestParam Long isbn, @RequestParam String titulo, @RequestParam Integer anio,
-            @RequestParam Integer ejemplares, @RequestParam Integer ejemplaresPrestados, @RequestParam Integer ejemplaresRestantes, @RequestParam String idAutor, @RequestParam String idEditorial,
-            @RequestParam MultipartFile archivo, @RequestParam Boolean alta, @RequestParam Categoria categoria, @RequestParam(required = false) String idUsuario) {
+            @RequestParam Integer ejemplares, @RequestParam (required = false) String idAutor, @RequestParam (required = false) String idEditorial,
+            @RequestParam MultipartFile archivo, @RequestParam Boolean alta, @RequestParam (required = false) Categoria categoria, @RequestParam(required = false) String idUsuario) {
 
         try {
-            libroServicio.crear(isbn, titulo, anio, ejemplares, ejemplaresPrestados, ejemplaresRestantes, idAutor,
+            libroServicio.crear(isbn, titulo, anio, ejemplares,  idAutor,
                     idEditorial, archivo, true, categoria);
         } catch (ErrorServicio e) {
-            modelo.put("error", e.getMessage());
+            modelo.put("errorReg", e.getMessage());
+            modelo.put("isbn", isbn);
             modelo.put("titulo", titulo);
             modelo.put("anio", anio);
             modelo.put("ejemplares", ejemplares);
-            modelo.put("ejemplaresPrestados", ejemplaresPrestados);
-            modelo.put("ejemplaresRestantes", ejemplaresRestantes);
             modelo.put("idAutor", idAutor);
             modelo.put("idEditorial", idEditorial);
             modelo.put("archivo", archivo);
-            modelo.put("categoria", categoria);
-            modelo.put("archivo", archivo);
+//            modelo.put("categorias", categoria.values());
             return "registro.html";
         }
 
         modelo.put("titulo", "El libro '" + titulo + "' fue cargada con exito!");
-        return "redirect:/index";
+        return "libro.html";
 
     }
 
-    @GetMapping("/modificar/{id}")
+    @GetMapping("/editarLibro/{id}")
     public String modificar(@PathVariable String id, ModelMap modelo) {
 
         try {
@@ -58,34 +57,32 @@ public class LibroController {
         } catch (Exception e) {
         }
 
-        return "/modificarLibro.html";
+        return "index.html";
     }
 
-    @PostMapping
+    @PostMapping("/editarLibro")
     public String modificar(ModelMap modelo, @RequestParam String id, @RequestParam Long isbn, @RequestParam String titulo,
             @RequestParam Integer anio,
-            @RequestParam Integer ejemplares, @RequestParam Integer ejemplaresPrestados, @RequestParam Integer ejemplaresRestantes,
+            @RequestParam Integer ejemplares,
             @RequestParam String idAutor, @RequestParam String idEditorial,
             @RequestParam MultipartFile archivo, @RequestParam Boolean alta, @RequestParam Categoria categoria,
             @RequestParam(required = false) String idUsuario) {
 
         try {
 
-            libroServicio.modificar(id, isbn, titulo, anio, ejemplares, ejemplaresPrestados, ejemplaresRestantes, idAutor,
+            libroServicio.modificar(id, isbn, titulo, anio, ejemplares, idAutor,
                     idEditorial, archivo, true, categoria);
         } catch (ErrorServicio e) {
-            modelo.put("error", e.getMessage());
+            modelo.put("errorReg", e.getMessage());
             modelo.put("titulo", titulo);
             modelo.put("anio", anio);
             modelo.put("ejemplares", ejemplares);
-            modelo.put("ejemplaresPrestados", ejemplaresPrestados);
-            modelo.put("ejemplaresRestantes", ejemplaresRestantes);
             modelo.put("idAutor", idAutor);
             modelo.put("idEditorial", idEditorial);
             modelo.put("archivo", archivo);
             modelo.put("categoria", categoria);
             modelo.put("archivo", archivo);
-            return "registro.html";    
+            return "registro.html";
         }
         modelo.put("exito", "Se edito el libro '" + titulo + "' con exito!");
         return "/index.html";

@@ -27,7 +27,7 @@ public class LibroServicio {
     private FotoServicio fotoServicio;
 
     private void validar(Long isbn, String titulo, Integer anio,
-            Integer ejemplares, Integer ejemplaresPrestados, Integer ejemplaresRestantes, String idAutor, String idEditorial, Categoria categoria) throws ErrorServicio {
+            Integer ejemplares, String idAutor, String idEditorial) throws ErrorServicio {
 
         if (isbn == null) {
             throw new ErrorServicio("El ISBN no puede ser nulo.");
@@ -41,15 +41,9 @@ public class LibroServicio {
         if (ejemplares == null) {
             throw new ErrorServicio("Los ejemplares no pueden ser nulos.");
         }
-        if (categoria == null) {
-            throw new ErrorServicio("La categoria no puede ser nula.");
-        }
-        if (ejemplaresPrestados == null) {
-            throw new ErrorServicio("Los ejemplares prestados no pueden ser nulos.");
-        }
-        if (ejemplaresRestantes == null) {
-            throw new ErrorServicio("Los ejemplares restantes no pueden ser nulos.");
-        }
+//        if (categoria == null) {
+//            throw new ErrorServicio("La categoria no puede ser nula.");
+//        }
         if (idAutor == null || titulo.isEmpty()) {
             throw new ErrorServicio("El autor no puede ser nulo.");
         }
@@ -60,17 +54,14 @@ public class LibroServicio {
     }
 
     @Transactional(rollbackFor = {Exception.class})
-    public Libro crear(Long isbn, String titulo, Integer anio, Integer ejemplares, Integer ejemplaresPrestados,
-            Integer ejemplaresRestantes, String idAutor, String idEditorial, MultipartFile archivo, Boolean alta, Categoria categoria) throws ErrorServicio {
+    public Libro crear(Long isbn, String titulo, Integer anio, Integer ejemplares, String idAutor, String idEditorial, MultipartFile archivo, Boolean alta, Categoria categoria) throws ErrorServicio {
 
-        validar(isbn, titulo, anio, ejemplares, ejemplaresPrestados, ejemplaresRestantes, idAutor, idEditorial, categoria);
+        validar(isbn, titulo, anio, ejemplares, idAutor, idEditorial);
         Libro libro = new Libro();
         libro.setIsbn(isbn);
         libro.setTitulo(titulo);
         libro.setAnio(anio);
         libro.setEjemplares(ejemplares);
-        libro.setEjemplaresPrestados(ejemplaresPrestados);
-        libro.setEjemplaresRestantes(ejemplaresRestantes);
         libro.setAlta(true);
         libro.setCategoria(categoria);
         Autor autor = autorServicio.buscarPorId(idAutor);
@@ -97,11 +88,10 @@ public class LibroServicio {
     }
 
     @Transactional(rollbackFor = {Exception.class})
-    public Libro modificar(String id, Long isbn, String titulo, Integer anio, Integer ejemplares, Integer ejemplaresPrestados,
-            Integer ejemplaresRestantes, String idAutor, String idEditorial, MultipartFile archivo, Boolean alta, 
+    public Libro modificar(String id, Long isbn, String titulo, Integer anio, Integer ejemplares, String idAutor, String idEditorial, MultipartFile archivo, Boolean alta, 
             Categoria categoria) throws ErrorServicio {
 
-        validar(isbn, titulo, anio, ejemplares, ejemplaresPrestados, ejemplaresRestantes, idAutor, idEditorial, categoria);
+        validar(isbn, titulo, anio, ejemplares, idAutor, idEditorial);
 
         Optional<Libro> respuesta = libroRepositorio.findById(id);
         if (respuesta.isPresent()) {
@@ -111,8 +101,6 @@ public class LibroServicio {
             libro.setAnio(anio);
             libro.setCategoria(categoria);
             libro.setEjemplares(ejemplares);
-            libro.setEjemplaresPrestados(ejemplaresPrestados);
-            libro.setEjemplaresRestantes(ejemplaresRestantes);
             libro.setAlta(true);
             Autor autor = autorServicio.buscarPorId(idAutor);
             libro.setAutor(autor);
@@ -157,11 +145,11 @@ public class LibroServicio {
         }
     }
 
-//    public List<Libro> buscarPorCategoria(Categoria categoria) throws ErrorServicio {
-//
-//        return libroRepositorio.buscarPorCategoria(categoria);
-//
-//    }
+    public List<Libro> buscarPorCategoria(Categoria categoria) throws ErrorServicio {
+
+        return libroRepositorio.buscarPorCategoria(categoria);
+
+    }
 
     public List<Libro> buscarTodas() throws ErrorServicio {
 

@@ -1,7 +1,16 @@
 package com.libreria.controladores;
 
+import com.libreria.entidades.Autor;
+import com.libreria.entidades.Editorial;
+import com.libreria.entidades.Libro;
+import com.libreria.enumeracion.Categoria;
 import com.libreria.errores.ErrorServicio;
+import com.libreria.repositorios.AutorRepositorio;
+import com.libreria.repositorios.EditorialRepositorio;
+import com.libreria.servicios.LibroServicio;
 import com.libreria.servicios.UsuarioServicio;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -19,7 +28,13 @@ public class PortalControlador {
 
     @Autowired
     private UsuarioServicio usuarioServicio;
-    
+    @Autowired
+    private LibroServicio libroServicio;
+    @Autowired
+    private AutorRepositorio autorRepositorio;
+    @Autowired
+    private EditorialRepositorio editorialRepositorio;
+
     @GetMapping("/")
     public String index() {
         return "index.html";
@@ -31,7 +46,24 @@ public class PortalControlador {
     }
 
     @GetMapping("/libro")
-    public String libro() {
+    public String libro(ModelMap modelo, @RequestParam(required = false) String categoria)throws ErrorServicio{
+        
+        List<Autor> autores = autorRepositorio.findAll();
+        modelo.put("autores", autores);
+        List<Editorial> editoriales = editorialRepositorio.findAll();
+        modelo.put("editoriales", editoriales);
+        
+         List<Libro> libros = new ArrayList<>();
+
+        if (categoria == null) {
+            libros = libroServicio.buscarTodas();
+        } else {
+            Categoria parsedCategoria = Categoria.valueOf(categoria);
+            libros = libroServicio.buscarPorCategoria(parsedCategoria);
+        }
+
+        modelo.put("libros", libros);
+        
         return "libro.html";
     }
 
@@ -47,8 +79,8 @@ public class PortalControlador {
 
     @GetMapping("/login")
     public String login(@RequestParam(required = false) String error, @RequestParam(required = false) String logout, ModelMap model) {
-         
-        if (error!=null) {
+
+        if (error != null) {
             model.put("error", "Mail o contraseña incorrecta");
         }
         if (logout != null) {
@@ -62,7 +94,7 @@ public class PortalControlador {
         try {
             usuarioServicio.registrar(nombre, mail, contrasenia, contrasenia2);
         } catch (ErrorServicio ex) {
-            modelo.put("error", ex.getMessage());   
+            modelo.put("error", ex.getMessage());
             modelo.put("nombre", nombre);
             modelo.put("mail", mail);
             modelo.put("contrasenia", contrasenia);

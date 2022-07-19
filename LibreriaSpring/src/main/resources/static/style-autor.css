@@ -16,8 +16,12 @@
 h2{
   text-align: center;
 }
+h4{
+  text-align: center;
+  color: green;
+}
 .row{
-  margin: 20px 20px !important;
+  margin: 10px 20px !important;
   /* margen interno de la tarjeta */
 }
 .card{ 

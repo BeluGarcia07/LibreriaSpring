@@ -24,8 +24,6 @@ public class Libro implements Serializable {
     private String titulo;
     private Integer anio;
     private Integer ejemplares;
-    private Integer ejemplaresPrestados;
-    private Integer ejemplaresRestantes;
     private Boolean alta;    
     @ManyToOne
     private Autor autor;
@@ -47,14 +45,12 @@ public class Libro implements Serializable {
     public Libro() {
     }
 
-    public Libro(String id, Long isbn, String titulo, Integer anio, Integer ejemplares, Integer ejemplaresPrestados, Integer ejemplaresRestantes, Boolean alta, Autor autor, Editorial editorial, Foto foto) {
+    public Libro(String id, Long isbn, String titulo, Integer anio, Integer ejemplares,  Boolean alta, Autor autor, Editorial editorial, Foto foto) {
         this.id = id;
         this.isbn = isbn;
         this.titulo = titulo;
         this.anio = anio;
         this.ejemplares = ejemplares;
-        this.ejemplaresPrestados = ejemplaresPrestados;
-        this.ejemplaresRestantes = ejemplaresRestantes;
         this.alta = alta;
         this.autor = autor;
         this.editorial = editorial;
@@ -79,14 +75,6 @@ public class Libro implements Serializable {
 
     public Integer getEjemplares() {
         return ejemplares;
-    }
-
-    public Integer getEjemplaresPrestados() {
-        return ejemplaresPrestados;
-    }
-
-    public Integer getEjemplaresRestantes() {
-        return ejemplaresRestantes;
     }
 
     public Boolean getAlta() {
@@ -121,14 +109,6 @@ public class Libro implements Serializable {
         this.ejemplares = ejemplares;
     }
 
-    public void setEjemplaresPrestados(Integer ejemplaresPrestados) {
-        this.ejemplaresPrestados = ejemplaresPrestados;
-    }
-
-    public void setEjemplaresRestantes(Integer ejemplaresRestantes) {
-        this.ejemplaresRestantes = ejemplaresRestantes;
-    }
-
     public void setAlta(Boolean alta) {
         this.alta = alta;
     }
@@ -151,7 +131,7 @@ public class Libro implements Serializable {
 
     @Override
     public String toString() {
-        return "Libro{" + "id=" + id + ", isbn=" + isbn + ", titulo=" + titulo + ", anio=" + anio + ", ejemplares=" + ejemplares + ", ejemplaresPrestados=" + ejemplaresPrestados + ", ejemplaresRestantes=" + ejemplaresRestantes + ", alta=" + alta + ", autor=" + autor + ", editorial=" + editorial + '}';
+        return "Libro{" + "id=" + id + ", isbn=" + isbn + ", titulo=" + titulo + ", anio=" + anio + ", ejemplares=" + ejemplares + ", alta=" + alta + ", autor=" + autor + ", editorial=" + editorial + '}';
     }
     
 }
