@@ -45,6 +45,7 @@ public class EditorialController {
         return "index.html";
     }
 
+    //    EN DESARROLLO
     @PostMapping("/editarEditorial")
     public String editar(ModelMap modelo, @RequestParam String id, @RequestParam String nombre) {
         try {

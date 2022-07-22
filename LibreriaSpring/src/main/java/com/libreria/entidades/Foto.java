@@ -5,6 +5,7 @@ import javax.persistence.Basic;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Lob;
 import org.hibernate.annotations.GenericGenerator;
@@ -13,8 +14,7 @@ import org.hibernate.annotations.GenericGenerator;
 public class Foto {
     
     @Id
-    @GeneratedValue(generator = "uuid")
-    @GenericGenerator(name = "uuid", strategy = "uuid2")        
+    @GeneratedValue(strategy = GenerationType.AUTO)      
     private String id;
     private String nombre;
     private String mime;

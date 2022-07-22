@@ -36,6 +36,7 @@ public class AutorController {
         return "autor.html";
     }
 
+    //    EN DESARROLLO
     @GetMapping("/editar/{id}")
     public String editar(@PathVariable String id, ModelMap modelo) {
 
@@ -48,6 +49,7 @@ public class AutorController {
         return "/editarAutor.html";
     }
 
+    //    EN DESARROLLO
     @PostMapping
     public String editar(ModelMap modelo, @RequestParam String id, @RequestParam String nombre, @RequestParam MultipartFile archivo) {
         try {

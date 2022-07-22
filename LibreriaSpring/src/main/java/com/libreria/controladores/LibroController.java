@@ -47,7 +47,8 @@ public class LibroController {
         return "libro.html";
 
     }
-
+    
+    //    EN DESARROLLO
     @GetMapping("/editarLibro/{id}")
     public String modificar(@PathVariable String id, ModelMap modelo) {
 
@@ -59,7 +60,8 @@ public class LibroController {
 
         return "index.html";
     }
-
+    
+    //    EN DESARROLLO
     @PostMapping("/editarLibro")
     public String modificar(ModelMap modelo, @RequestParam String id, @RequestParam Long isbn, @RequestParam String titulo,
             @RequestParam Integer anio,

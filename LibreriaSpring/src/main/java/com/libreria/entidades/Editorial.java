@@ -5,15 +5,15 @@ package com.libreria.entidades;
 import java.io.Serializable;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import org.hibernate.annotations.GenericGenerator;
 
 @Entity
-public class Editorial implements Serializable {
+public class Editorial{
     
     @Id
-    @GeneratedValue(generator = "uuid")
-    @GenericGenerator(name = "uuid", strategy = "uuid2")
+    @GeneratedValue(strategy = GenerationType.AUTO)
     private String id;
     private String nombre;
     private Boolean alta;
